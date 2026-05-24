@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Disease Detection AI</title>
+  <link rel="icon" href="{{ url_for('static', filename='icon.svg') }}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-icon.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='globals.css') }}">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          boxShadow: {
+            soft: '0 25px 80px rgba(14, 165, 233, 0.12)',
+          },
+        },
+      },
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(16,185,129,0.16),transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(34,197,94,0.18),transparent_30%),#ecfdf5] text-slate-900">
+  <div class="container mx-auto px-4 py-8">
+    <header class="mb-10">
+      <div class="rounded-[2rem] border border-slate-200/80 bg-white/85 p-6 shadow-soft backdrop-blur-xl">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div class="flex items-center gap-4">
+            <img src="{{ url_for('static', filename='placeholder-logo.png') }}" alt="Crop Health AI" class="h-14 w-14 rounded-2xl border border-slate-200/60 bg-emerald-50 p-3">
+            <div>
+              <p class="text-xs uppercase tracking-[0.35em] text-emerald-600">AI Agricultural Intelligence</p>
+              <h1 class="mt-3 text-3xl font-semibold text-slate-900 sm:text-4xl">Crop Disease Detection Dashboard</h1>
+            </div>
+          </div>
+          <div class="grid gap-3 sm:auto-cols-max sm:grid-flow-col">
+            <a href="/" class="rounded-3xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-emerald-200/40 transition hover:bg-emerald-700">Dashboard</a>
+            <a href="/about" class="rounded-3xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-emerald-300 hover:text-emerald-700">About</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="grid gap-8 xl:grid-cols-[1.3fr_0.7fr]">
+      <section class="space-y-8">
+        <div class="rounded-[2rem] border border-slate-200/80 bg-white/90 p-6 shadow-soft backdrop-blur-xl">
+          <div class="grid gap-6 lg:grid-cols-[1fr_320px]">
+            <div class="space-y-4">
+              <p class="text-sm uppercase tracking-[0.35em] text-emerald-600">Smart farming insights</p>
+              <h2 class="text-3xl font-semibold text-slate-900">Detect crop disease with AI-driven predictions and expert guidance.</h2>
+              <p class="max-w-2xl text-slate-600">Upload crop images, get instant predictions, and access prevention tips that help you keep your field healthy and productive.</p>
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div class="rounded-3xl border border-slate-200 bg-emerald-50 p-4">
+                  <p class="text-sm text-emerald-700">Healthy crop rate</p>
+                  <p class="mt-3 text-2xl font-semibold text-slate-900">96%</p>
+                </div>
+                <div class="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+                  <p class="text-sm text-slate-500">Forecast confidence</p>
+                  <p class="mt-3 text-2xl font-semibold text-slate-900">94.7%</p>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-[2rem] border border-emerald-100 bg-emerald-50/90 p-6 shadow-inner shadow-emerald-100/40">
+              <p class="text-xs uppercase tracking-[0.35em] text-emerald-700">Field readiness</p>
+              <h3 class="mt-4 text-2xl font-semibold text-slate-900">Healthy growth predicted for next cycle</h3>
+              <p class="mt-3 text-slate-600">Monitor crop conditions, disease risk, and moisture trends to optimize your harvest strategy.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] border border-slate-200/80 bg-white/90 p-6 shadow-soft backdrop-blur-xl">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p class="text-sm uppercase tracking-[0.35em] text-slate-500">Upload image</p>
+              <h3 class="text-2xl font-semibold text-slate-900">Analyze your crop now</h3>
+            </div>
+            <div class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm text-emerald-700">
+              <span class="h-2.5 w-2.5 rounded-full bg-emerald-700"></span>
+              Live prediction ready
+            </div>
+          </div>
+
+          <form action="/predict" method="POST" enctype="multipart/form-data" class="mt-6 space-y-5">
+            <div>
+              <label for="file" class="block text-sm font-medium text-slate-700">Select an image</label>
+              <input type="file" name="file" id="file" required class="mt-2 block w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200" />
+            </div>
+            <button type="submit" class="inline-flex w-full items-center justify-center rounded-3xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-200/40 transition hover:bg-emerald-700">Predict Disease</button>
+          </form>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="rounded-[2rem] border border-slate-200/80 bg-white/90 p-6 shadow-soft backdrop-blur-xl">
+            <p class="text-sm uppercase tracking-[0.35em] text-slate-500">Sample image</p>
+            <img src="{{ url_for('static', filename='potato-healthy.jpg') }}" alt="Healthy potato" class="mt-4 h-44 w-full rounded-3xl object-cover" />
+            <p class="mt-4 text-lg font-semibold text-slate-900">Healthy Potato</p>
+          </div>
+          <div class="rounded-[2rem] border border-slate-200/80 bg-white/90 p-6 shadow-soft backdrop-blur-xl">
+            <p class="text-sm uppercase tracking-[0.35em] text-slate-500">Sample image</p>
+            <img src="{{ url_for('static', filename='potato-early-blight.jpg') }}" alt="Early blight potato" class="mt-4 h-44 w-full rounded-3xl object-cover" />
+            <p class="mt-4 text-lg font-semibold text-slate-900">Early Blight</p>
+          </div>
+        </div>
+      </section>
+
+      <aside class="space-y-6">
+        <div class="rounded-[2rem] border border-slate-200/80 bg-white/95 p-6 shadow-soft backdrop-blur-xl">
+          <p class="text-sm uppercase tracking-[0.35em] text-emerald-600">AI farming assistant</p>
+          <h3 class="mt-4 text-2xl font-semibold text-slate-900">Actionable crop intelligence</h3>
+          <p class="mt-3 text-slate-600">Receive disease alerts, treatment suggestions, and practical prevention advice from a smart agricultural dashboard.</p>
+          <div class="mt-6 grid gap-3">
+            <div class="rounded-3xl bg-slate-50 p-4">
+              <p class="text-sm text-slate-500">Disease insights</p>
+              <p class="mt-2 text-xl font-semibold text-slate-900">Early detection</p>
+            </div>
+            <div class="rounded-3xl bg-emerald-50 p-4">
+              <p class="text-sm text-emerald-700">Soil health</p>
+              <p class="mt-2 text-xl font-semibold text-slate-900">68% moisture</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] border border-slate-200/80 bg-white/95 p-6 shadow-soft backdrop-blur-xl">
+          <p class="text-sm uppercase tracking-[0.35em] text-slate-500">Quick stats</p>
+          <div class="mt-6 grid gap-4">
+            <div class="rounded-3xl bg-slate-50 p-5">
+              <p class="text-sm text-slate-500">Analyses completed</p>
+              <p class="mt-3 text-2xl font-semibold text-slate-900">1,258</p>
+            </div>
+            <div class="rounded-3xl bg-slate-50 p-5">
+              <p class="text-sm text-slate-500">Alerts issued</p>
+              <p class="mt-3 text-2xl font-semibold text-slate-900">12</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    {% if prediction or error %}
+    <section class="mt-10 grid gap-8 lg:grid-cols-2">
+      <div class="rounded-[2rem] border border-slate-200/80 bg-white/95 p-6 shadow-soft backdrop-blur-xl">
+        <h2 class="text-2xl font-semibold text-slate-900">Prediction Result</h2>
+        {% if error %}
+          <p class="mt-4 rounded-3xl border border-red-200 bg-red-50 p-4 text-red-700">{{ error }}</p>
+        {% else %}
+          <div class="mt-6 space-y-4">
+            <div class="rounded-3xl bg-slate-50 p-4">
+              <p class="text-sm text-slate-500">Detected disease</p>
+              <p class="mt-2 text-xl font-semibold text-slate-900">{{ prediction }}</p>
+            </div>
+            {% if confidence %}
+            <div class="rounded-3xl bg-slate-50 p-4">
+              <p class="text-sm text-slate-500">Confidence</p>
+              <p class="mt-2 text-xl font-semibold text-slate-900">{{ confidence }}%</p>
+            </div>
+            {% endif %}
+            {% if image %}
+            <div class="rounded-3xl bg-slate-50 p-4">
+              <p class="text-sm text-slate-500">Uploaded photo</p>
+              <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="Uploaded sample" class="mt-4 w-full rounded-3xl object-cover" />
+            </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if not error %}
+      <div class="space-y-6">
+        <div class="rounded-[2rem] border border-slate-200/80 bg-white/95 p-6 shadow-soft backdrop-blur-xl">
+          <h3 class="text-xl font-semibold text-slate-900">Disease Information</h3>
+          <p class="mt-4 text-slate-600">{% if prediction == 'Healthy' %}Your crop appears to be healthy. Keep following best practices to maintain plant vigor.{% else %}Detected disease: {{ prediction }}. Consider targeted treatment, improved airflow, and clean irrigation methods.{% endif %}</p>
+        </div>
+        <div class="rounded-[2rem] border border-slate-200/80 bg-white/95 p-6 shadow-soft backdrop-blur-xl">
+          <h3 class="text-xl font-semibold text-slate-900">Prevention Tips</h3>
+          <ul class="mt-4 space-y-3 text-slate-600">
+            <li>• Keep crops spaced for air circulation.</li>
+            <li>• Use disease-resistant seeds where available.</li>
+            <li>• Monitor regularly for early symptoms.</li>
+            <li>• Rotate crops and balance soil nutrients.</li>
+            <li>• Avoid overwatering and standing moisture.</li>
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+    </section>
+    {% endif %}
+  </div>
+</body>
+</html>
